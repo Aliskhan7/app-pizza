@@ -8,7 +8,7 @@ interface Props {
   className?: string;
 }
 
-const TopBar: React.FC<Props> = ({ className }) => {
+export const TopBar: React.FC<Props> = ({ className }) => {
   return (
     <div
       className={cn(
@@ -23,5 +23,3 @@ const TopBar: React.FC<Props> = ({ className }) => {
     </div>
   );
 };
-
-export default TopBar;
