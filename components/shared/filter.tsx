@@ -1,3 +1,6 @@
+import { CheckboxFiltersGroup } from "@/components/shared/checkbox-filters-group";
+
+("use client ");
 import React from "react";
 import { Title } from "@/components/shared/title";
 import { FilterCheckbox } from "@/components/shared/filter-checkbox";
@@ -31,6 +34,88 @@ export const Filter: React.FC<Props> = ({ className }) => {
         </div>
         <RangeSlider min={0} max={5000} step={10} value={[0, 5000]} />
       </div>
+
+      <CheckboxFiltersGroup
+        className="mt-5"
+        title="Формат"
+        limit={6}
+        defaultItems={[
+          {
+            text: "Сырный соус",
+            value: "1",
+          },
+          {
+            text: "Моццарелла",
+            value: "2",
+          },
+          {
+            text: "Чеснок",
+            value: "3",
+          },
+          {
+            text: "Солённые огурчики",
+            value: "4",
+          },
+          {
+            text: "Красный лук",
+            value: "5",
+          },
+          {
+            text: "Томаты",
+            value: "6",
+          },
+        ]}
+        items={[
+          {
+            text: "Сырный соус",
+            value: "1",
+          },
+          {
+            text: "Моццарелла",
+            value: "2",
+          },
+          {
+            text: "Чеснок",
+            value: "3",
+          },
+          {
+            text: "Солённые огурчики",
+            value: "4",
+          },
+          {
+            text: "Красный лук",
+            value: "5",
+          },
+          {
+            text: "Томаты",
+            value: "6",
+          },
+          {
+            text: "Сырный соус",
+            value: "1",
+          },
+          {
+            text: "Моццарелла",
+            value: "2",
+          },
+          {
+            text: "Чеснок",
+            value: "3",
+          },
+          {
+            text: "Солённые огурчики",
+            value: "4",
+          },
+          {
+            text: "Красный лук",
+            value: "5",
+          },
+          {
+            text: "Томаты",
+            value: "6",
+          },
+        ]}
+      />
     </div>
   );
 };
