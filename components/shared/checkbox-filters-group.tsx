@@ -1,17 +1,17 @@
 "use client";
 
 import React from "react";
-import { useSet } from "react-use";
+// import { useSet } from "react-use";
 
-import { FilterCheckbox, FilterChecboxProps } from "./filter-checkbox";
+import { FilterCheckbox, FilterCheckboxProps } from "./filter-checkbox";
 import { Input } from "../ui/input";
 
-type Item = FilterChecboxProps;
+type Item = FilterCheckboxProps;
 
 interface Props {
   title: string;
   items: Item[];
-  defaultItems?: Item[];
+  defaultItems: Item[];
   limit?: number;
   searchInputPlaceholder?: string;
   className?: string;
@@ -38,25 +38,25 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
 
   const list = showAll
     ? items.filter((item) =>
-        item.text.toLowerCase().includes(searchValue.toLowerCase()),
+        item.text.toLowerCase().includes(searchValue.toLocaleLowerCase()),
       )
-    : defaultItems?.slice(0, limit);
+    : defaultItems.slice(0, limit);
 
-  const [selected, { add, toggle }] = useSet<string>(new Set([]));
-
-  const onCheckedChange = (value: string) => {
-    toggle(value);
-  };
-
-  React.useEffect(() => {
-    if (defaultValue) {
-      defaultValue.forEach(add);
-    }
-  }, [defaultValue?.length]);
-
-  React.useEffect(() => {
-    onChange?.(Array.from(selected));
-  }, [selected]);
+  // const [selected, { add, toggle }] = useSet<string>(new Set([]));
+  //
+  // const onCheckedChange = (value: string) => {
+  //   toggle(value);
+  // };
+  //
+  // React.useEffect(() => {
+  //   if (defaultValue) {
+  //     defaultValue.forEach(add);
+  //   }
+  // }, [defaultValue?.length]);
+  //
+  // React.useEffect(() => {
+  //   onChange?.(Array.from(selected));
+  // }, [selected]);
 
   return (
     <div className={className}>
@@ -73,10 +73,10 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
       )}
 
       <div className="flex flex-col gap-4 max-h-96 pr-2 overflow-auto scrollbar">
-        {(showAll ? items : defaultItems || items).map((item) => (
+        {list?.map((item) => (
           <FilterCheckbox
-            onCheckedChange={() => onCheckedChange(item.value)}
-            checked={selected.has(item.value)}
+            onCheckedChange={(ids) => console.log(ids)}
+            checked={false}
             key={String(item.value)}
             value={item.value}
             text={item.text}
