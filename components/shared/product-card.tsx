@@ -12,7 +12,7 @@ interface Props {
   imageUrl: string;
   className?: string;
 }
-const ProductCard: React.FC<Props> = ({
+export const ProductCard: React.FC<Props> = ({
   id,
   name,
   className,
@@ -53,5 +53,3 @@ const ProductCard: React.FC<Props> = ({
     </div>
   );
 };
-
-export default ProductCard;
