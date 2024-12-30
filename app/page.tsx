@@ -43,8 +43,78 @@ export default function Home() {
                     price: 550,
                     items: [{ price: 444 }],
                   },
+                  {
+                    id: 4,
+                    name: "Маргарита",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EE7D610BBEB562BD4D48786AD87270.webp",
+                    price: 550,
+                    items: [{ price: 444 }],
+                  },
+                  {
+                    id: 5,
+                    name: "Маргарита",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EE7D610BBEB562BD4D48786AD87270.webp",
+                    price: 550,
+                    items: [{ price: 444 }],
+                  },
                 ]}
                 categoryId={1}
+              />
+              <ProductsGroupList
+                title="Комбо"
+                items={[
+                  {
+                    id: 1,
+                    name: "Маргарита",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EE7D610BBEB562BD4D48786AD87270.webp",
+                    price: 550,
+                    items: [{ price: 444 }],
+                  },
+                  {
+                    id: 2,
+                    name: "Маргарита",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EE7D610BBEB562BD4D48786AD87270.webp",
+                    price: 550,
+                    items: [{ price: 444 }],
+                  },
+                  {
+                    id: 3,
+                    name: "Маргарита",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EE7D610BBEB562BD4D48786AD87270.webp",
+                    price: 550,
+                    items: [{ price: 444 }],
+                  },
+                  {
+                    id: 4,
+                    name: "Маргарита",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EE7D610BBEB562BD4D48786AD87270.webp",
+                    price: 550,
+                    items: [{ price: 444 }],
+                  },
+                  {
+                    id: 5,
+                    name: "Маргарита",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EE7D610BBEB562BD4D48786AD87270.webp",
+                    price: 550,
+                    items: [{ price: 444 }],
+                  },
+                  {
+                    id: 6,
+                    name: "Маргарита",
+                    imageUrl:
+                      "https://media.dodostatic.net/image/r:292x292/11EE7D610BBEB562BD4D48786AD87270.webp",
+                    price: 550,
+                    items: [{ price: 444 }],
+                  },
+                ]}
+                categoryId={2}
               />
             </div>
           </div>
