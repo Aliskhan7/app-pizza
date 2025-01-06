@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { hashSync } from "bcrypt";
 import { category, ingredients, products } from "./constants";
-import { Prisma } from "@prisma/client/extension";
+import { Prisma } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -23,7 +23,7 @@ const generateProductItem = ({
     price: randomNumber(190, 600),
     pizzaType,
     size,
-  };
+  } as Prisma.ProductItemUncheckedCreateInput;
 };
 
 async function up() {
@@ -130,7 +130,79 @@ async function up() {
         pizzaType: 2,
         size: 40,
       }),
+
+      generateProductItem({
+        productId: 1,
+      }),
+      generateProductItem({
+        productId: 2,
+      }),
+      generateProductItem({
+        productId: 3,
+      }),
+      generateProductItem({
+        productId: 4,
+      }),
+      generateProductItem({
+        productId: 5,
+      }),
+      generateProductItem({
+        productId: 6,
+      }),
+      generateProductItem({
+        productId: 7,
+      }),
+      generateProductItem({
+        productId: 8,
+      }),
+      generateProductItem({
+        productId: 9,
+      }),
+      generateProductItem({
+        productId: 10,
+      }),
+      generateProductItem({
+        productId: 11,
+      }),
+      generateProductItem({
+        productId: 12,
+      }),
+      generateProductItem({
+        productId: 13,
+      }),
+      generateProductItem({
+        productId: 14,
+      }),
+      generateProductItem({
+        productId: 15,
+      }),
     ],
+  });
+
+  await prisma.cart.createMany({
+    data: [
+      {
+        userId: 1,
+        totalAmount: 0,
+        token: "111",
+      },
+      {
+        userId: 2,
+        totalAmount: 0,
+        token: "222",
+      },
+    ],
+  });
+
+  await prisma.cartItem.create({
+    data: {
+      productItemId: 1,
+      cartId: 1,
+      quantity: 1,
+      ingredients: {
+        connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
+      },
+    },
   });
 }
 
@@ -139,6 +211,9 @@ async function down() {
   await prisma.$executeRaw`TRUNCATE TABLE "Product" RESTART IDENTITY CASCADE;`;
   await prisma.$executeRaw`TRUNCATE TABLE "ProductItem" RESTART IDENTITY CASCADE;`;
   await prisma.$executeRaw`TRUNCATE TABLE "Category" RESTART IDENTITY CASCADE;`;
+  await prisma.$executeRaw`TRUNCATE TABLE "Ingredient" RESTART IDENTITY CASCADE;`;
+  await prisma.$executeRaw`TRUNCATE TABLE "Cart" RESTART IDENTITY CASCADE;`;
+  await prisma.$executeRaw`TRUNCATE TABLE "CartItem" RESTART IDENTITY CASCADE;`;
 }
 
 async function main() {
