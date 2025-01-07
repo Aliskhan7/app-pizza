@@ -32,17 +32,13 @@ async function up() {
       {
         fullName: "User",
         email: "user@email.com",
-        phone: "79992222222",
         password: hashSync("1111", 10),
-        verified: new Date(),
         role: "USER",
       },
       {
         fullName: "Admin",
         email: "admin@email.com",
-        phone: "79991111111",
         password: hashSync("2222", 10),
-        verified: new Date(),
         role: "ADMIN",
       },
     ],

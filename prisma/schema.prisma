@@ -11,18 +11,17 @@ model User {
   id       Int    @id @default(autoincrement())
 
   fullName String
-  phone    String @unique
   email    String @unique
   password    String
+
   role         UserRole          @default(USER)
-  verified DateTime
 
   provider String?
   providerId String?
 
   cart Cart?
   orders Order[]
-  verification VerificationCode?
+  verificationCode VerificationCode?
 
   createdAt     DateTime  @default(now())
   updateAt      DateTime @updatedAt
@@ -54,9 +53,9 @@ model ProductItem {
 
   price    Int
   size     Int?
-  pizzaType Int
+  pizzaType Int?
 
-  cartItem CartItem[]
+  cartItems CartItem[]
 
   product Product @relation(fields: [productId], references: [id])
   productId Int
@@ -71,7 +70,7 @@ model Ingredient {
   imageUrl String
 
   products Product[]
-  cartItem CartItem[]
+  cartItems CartItem[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -85,7 +84,7 @@ model Cart {
 
   items CartItem[]
 
-  token String
+  token String?
 
   totalAmount Int @default(0)
 
@@ -114,7 +113,7 @@ model Order {
     id       Int    @id @default(autoincrement())
 
     user User? @relation(fields: [userId], references: [id])
-    userId Int
+    userId Int?
 
     token String?
 
@@ -142,7 +141,7 @@ model VerificationCode {
 
   code String
 
-  expiresAt DateTime @default(now())
+  createdAt DateTime @default(now())
 
   @@unique([userId, code])
 }
