@@ -90,8 +90,6 @@ async function up() {
     },
   });
 
-  // const productsFromDb = await prisma.product.findMany();
-
   await prisma.productItem.createMany({
     data: [
       generateProductItem({
