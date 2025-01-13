@@ -1,6 +1,5 @@
+"use client";
 import { CheckboxFiltersGroup } from "@/components/shared/checkbox-filters-group";
-
-("use client ");
 import React from "react";
 import { Title } from "@/components/shared/title";
 import { FilterCheckbox } from "@/components/shared/filter-checkbox";
@@ -11,7 +10,7 @@ interface Props {
   className?: string;
 }
 
-export const Filter: React.FC<Props> = ({ className }) => {
+export const Filters: React.FC<Props> = ({ className }) => {
   return (
     <div className={className}>
       <Title text="Фильтрация" size="sm" className="mb-5 font-bold" />
