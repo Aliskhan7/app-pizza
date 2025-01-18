@@ -1,28 +1,29 @@
 "use client";
 import { CheckboxFiltersGroup } from "@/components/shared/checkbox-filters-group";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Title } from "@/components/shared/title";
-import { FilterCheckbox } from "@/components/shared/filter-checkbox";
 import { Input } from "@/components/ui";
 import { RangeSlider } from "@/components/ui";
 import { useFilterIngredients } from "@/app/hooks/useFilterIngredients";
 import { useSet } from "react-use";
+import qs from "qs";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface Props {
   className?: string;
 }
 
 interface PriceProps {
-  priceFrom: number;
-  priceTo: number;
+  priceFrom?: number;
+  priceTo?: number;
 }
 
 export const Filters: React.FC<Props> = ({ className }) => {
-  const { ingredients, loading, onAddId, selectedIds } = useFilterIngredients();
-  const [prices, setPrice] = useState<PriceProps>({
-    priceFrom: 0,
-    priceTo: 1000,
-  });
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const { ingredients, loading, onAddId, selectedIngredients } =
+    useFilterIngredients();
+  const [prices, setPrice] = useState<PriceProps>({});
 
   const [sizes, { toggle: toggleSizes }] = useSet(new Set<string>([]));
   const [pizzaTypes, { toggle: togglePizzaTypes }] = useSet(
@@ -40,6 +41,23 @@ export const Filters: React.FC<Props> = ({ className }) => {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    const filters = {
+      ...prices,
+      pizzaTypes: Array.from(pizzaTypes),
+      sizes: Array.from(sizes),
+      ingredients: Array.from(selectedIngredients),
+    };
+
+    const query = qs.stringify(filters, {
+      arrayFormat: "comma",
+    });
+
+    router.push(`?${query}`, {
+      scroll: false,
+    });
+  }, [prices, pizzaTypes, sizes, selectedIngredients]);
 
   return (
     <div className={className}>
@@ -93,7 +111,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
           min={0}
           max={1000}
           step={10}
-          value={[prices.priceFrom, prices.priceTo]}
+          value={[prices.priceFrom || 0, prices.priceTo || 1000]}
           onValueChange={([priceFrom, priceTo]) =>
             setPrice({ priceFrom, priceTo })
           }
@@ -109,7 +127,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
         items={items}
         loading={loading}
         onClickCheckbox={onAddId}
-        selected={selectedIds}
+        selected={selectedIngredients}
       />
     </div>
   );
