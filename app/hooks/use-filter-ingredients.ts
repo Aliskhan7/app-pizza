@@ -9,10 +9,10 @@ interface ReturnType {
   selectedIngredients: Set<string>;
   onAddId: (id: string) => void;
 }
-export const useFilterIngredients = (): ReturnType => {
+export const useFilterIngredients = (values: string[] = []): ReturnType => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const [loading, setLoading] = useState(false);
-  const [selectedIds, { toggle }] = useSet(new Set<string>([]));
+  const [selectedIds, { toggle }] = useSet(new Set<string>(values));
 
   useEffect(() => {
     async function fetchIngredients() {
