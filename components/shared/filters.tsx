@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Title } from "@/components/shared/title";
 import { Input } from "@/components/ui";
 import { RangeSlider } from "@/components/ui";
-import { useFilterIngredients } from "@/app/hooks/useFilterIngredients";
+import { useFilterIngredients } from "@/app/hooks/use-filter-ingredients";
 import { useSet } from "react-use";
 import qs from "qs";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -18,16 +18,36 @@ interface PriceProps {
   priceTo?: number;
 }
 
+interface QueryFilters extends PriceProps {
+  pizzaTypes: string;
+  sizes: string;
+  ingredients: string;
+}
+
 export const Filters: React.FC<Props> = ({ className }) => {
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams() as unknown as Map<
+    keyof QueryFilters,
+    string
+  >;
   const router = useRouter();
   const { ingredients, loading, onAddId, selectedIngredients } =
-    useFilterIngredients();
-  const [prices, setPrice] = useState<PriceProps>({});
+    useFilterIngredients(searchParams.get("ingredients")?.split(","));
+  const [prices, setPrice] = useState<PriceProps>({
+    priceFrom: Number(searchParams.get("priceFrom")) || undefined,
+    priceTo: Number(searchParams.get("priceTo")) || undefined,
+  });
 
-  const [sizes, { toggle: toggleSizes }] = useSet(new Set<string>([]));
+  const [sizes, { toggle: toggleSizes }] = useSet(
+    new Set<string>(
+      searchParams.get("sizes") ? searchParams.get("sizes")?.split(",") : [],
+    ),
+  );
   const [pizzaTypes, { toggle: togglePizzaTypes }] = useSet(
-    new Set<string>([]),
+    new Set<string>(
+      searchParams.get("pizzaTypes")
+        ? searchParams.get("pizzaTypes")?.split(",")
+        : [],
+    ),
   );
 
   const items = ingredients.map((ingredient) => ({
