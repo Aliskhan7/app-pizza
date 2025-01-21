@@ -63,22 +63,6 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
       )
     : (defaultItems || items).slice(0, limit);
 
-  // const [selected, { add, toggle }] = useSet<string>(new Set([]));
-  //
-  // const onCheckedChange = (value: string) => {
-  //   toggle(value);
-  // };
-  //
-  // React.useEffect(() => {
-  //   if (defaultValue) {
-  //     defaultValue.forEach(add);
-  //   }
-  // }, [defaultValue?.length]);
-  //
-  // React.useEffect(() => {
-  //   onChange?.(Array.from(selected));
-  // }, [selected]);
-
   return (
     <div className={className}>
       <p className="font-bold mb-3">{title}</p>
