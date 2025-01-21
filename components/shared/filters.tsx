@@ -21,6 +21,11 @@ export const Filters: React.FC<Props> = ({ className }) => {
     text: ingredient.name,
   }));
 
+  const updatePrice = (prices: number[]) => {
+    filters.setPrices("priceFrom", prices[0]);
+    filters.setPrices("priceTo", prices[1]);
+  };
+
   return (
     <div className={className}>
       <Title text="Фильтрация" size="sm" className="mb-5 font-bold" />
@@ -66,7 +71,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
             type="number"
             min={100}
             max={30000}
-            placeholder="30000"
+            placeholder="1000"
             value={String(filters.prices.priceTo)}
             onChange={(e) =>
               filters.setPrices("priceTo", Number(e.target.value))
@@ -77,10 +82,11 @@ export const Filters: React.FC<Props> = ({ className }) => {
           min={0}
           max={1000}
           step={10}
-          value={[prices.priceFrom || 0, prices.priceTo || 1000]}
-          onValueChange={([priceFrom, priceTo]) =>
-            setPrice({ priceFrom, priceTo })
-          }
+          value={[
+            filters.prices.priceFrom || 0,
+            filters.prices.priceTo || 1000,
+          ]}
+          onValueChange={updatePrice}
         />
       </div>
 
@@ -92,8 +98,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
         defaultItems={items.slice(0, 6)}
         items={items}
         loading={loading}
-        onClickCheckbox={onAddId}
-        selected={selectedIngredients}
+        onClickCheckbox={filters.setSelectedIngredients}
+        selected={filters.selectedIngredients}
       />
     </div>
   );
