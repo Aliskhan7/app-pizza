@@ -11,4 +11,5 @@ export { ProductCard } from "./product-card";
 export { SearchInput } from "./search-input";
 export { ProductImage } from "./product-image";
 export { GroupVariants } from "./group-varients";
+export { ChoosePizzaForm } from "./choose-pizza-form";
 export * from "./modals";

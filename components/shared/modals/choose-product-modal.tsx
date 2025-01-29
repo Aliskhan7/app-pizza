@@ -6,6 +6,7 @@ import { Product } from "@prisma/client";
 import { cn } from "@/lib/utils";
 import { Dialog } from "@/components/ui";
 import { DialogContent } from "@/components/ui/dialog";
+import { ChoosePizzaForm } from "@/components/shared";
 
 interface Props {
   product: Product;
@@ -22,7 +23,9 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
           "p-0 w-[1060px] max-w-[1060px] min-h-[500px] bg-white overflow-hidden",
           className,
         )}
-      ></DialogContent>
+      >
+        <ChoosePizzaForm />
+      </DialogContent>
     </Dialog>
   );
 };
