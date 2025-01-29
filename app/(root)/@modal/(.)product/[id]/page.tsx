@@ -2,7 +2,7 @@ import { prisma } from "@/prisma/prisma-client";
 import { notFound } from "next/navigation";
 import { ChooseProductModal } from "@/components/shared";
 
-export default async function ProductModalPage({
+async function ProductModalPage({
   params: { id },
 }: {
   params: { id: string };
@@ -23,3 +23,4 @@ export default async function ProductModalPage({
 
   return <ChooseProductModal product={product} />;
 }
+export default ProductModalPage;
