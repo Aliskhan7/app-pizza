@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 export const useQueryFilters = (filters: Filters) => {
   const router = useRouter();
-
+  console.log("Current filters:", filters);
   useEffect(() => {
     const params = {
       ...filters.prices,
@@ -17,6 +17,10 @@ export const useQueryFilters = (filters: Filters) => {
     const query = qs.stringify(params, {
       arrayFormat: "comma",
     });
+    if (window.location.search === `?${query}`) {
+      return; // ⛔ Если URL уже такой же, выходим из useEffect
+    }
+    console.log("Updating query string:", query);
 
     router.push(`?${query}`, {
       scroll: false,
