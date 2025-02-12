@@ -6,13 +6,19 @@ import { cn } from "@/shared/lib/utils";
 import { Title } from "@/shared/components/shared/title";
 import { GroupVariants } from "@/shared/components/shared/group-varients";
 import { PizzaImage } from "@/shared/components/shared/pizza-image";
-import { pizzaSizes } from "@/shared/constants/pizza";
+import {
+  PizzaSize,
+  pizzaSizes,
+  PizzaType,
+  pizzaTypes,
+} from "@/shared/constants/pizza";
+import { Button } from "@/shared/components/ui";
 
 interface Props {
   imageUrl: string;
   name: string;
   ingredients: Ingredient[];
-  items: ProductItem[];
+  items?: ProductItem[];
   loading?: boolean;
   onSubmit: (itemId: number, ingredients: number[]) => void;
   className?: string;
