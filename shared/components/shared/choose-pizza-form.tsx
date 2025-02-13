@@ -13,12 +13,13 @@ import {
   pizzaTypes,
 } from "@/shared/constants/pizza";
 import { Button } from "@/shared/components/ui";
+import { IngredientItem } from "@/shared/components/shared/Ingredient-item";
 
 interface Props {
   imageUrl: string;
   name: string;
   ingredients: Ingredient[];
-  items?: ProductItem[];
+  items: ProductItem[];
   loading?: boolean;
   onSubmit: (itemId: number, ingredients: number[]) => void;
   className?: string;
