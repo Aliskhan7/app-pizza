@@ -13,4 +13,5 @@ export { PizzaImage } from "./pizza-image";
 export { GroupVariants } from "./group-varients";
 export { ChooseProductForm } from "./choose-product-form";
 export { ChoosePizzaForm } from "./choose-pizza-form";
+export { IngredientItem } from "./ingredient-item";
 export * from "./modals";
