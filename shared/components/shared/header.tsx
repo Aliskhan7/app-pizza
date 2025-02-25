@@ -6,7 +6,7 @@ import { Container } from "@/shared/components/shared";
 import { Button } from "@/shared/components/ui";
 import Link from "next/link";
 import { SearchInput } from "@/shared/components/shared";
-import { CardButton } from "@/shared/components/shared";
+import { CartButton } from "@/shared/components/shared";
 interface Props {
   className?: string;
 }
@@ -38,7 +38,7 @@ export const Header: React.FC<Props> = ({ className }) => {
           </Button>
 
           <div>
-            <CardButton />
+            <CartButton />
           </div>
         </div>
       </Container>

@@ -17,7 +17,7 @@ interface Props {
   className?: string;
 }
 
-export const CardDrawer: React.FC<React.PropsWithChildren<Props>> = ({
+export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
   children,
   className,
 }) => {
