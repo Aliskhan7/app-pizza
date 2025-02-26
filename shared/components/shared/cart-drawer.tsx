@@ -12,6 +12,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/shared/components/ui";
 import Link from "next/link";
 import { cn } from "@/shared/lib/utils";
+import { CartDrawerItem } from "@/shared/components/shared/cart-drawer-item";
 
 interface Props {
   className?: string;
@@ -31,6 +32,12 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
             В корзине <span className="font-bold"> товара</span>
           </SheetTitle>
         </SheetHeader>
+
+        <div className="-mx-6 mt-5 overflow-auto flex-1">
+          <div className="mb-2">
+            <CartDrawerItem details={} />
+          </div>
+        </div>
 
         <SheetFooter className="-mx-6 bg-white p-8">
           <div className="w-full">
