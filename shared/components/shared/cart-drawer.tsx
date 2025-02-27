@@ -11,7 +11,6 @@ import {
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/shared/components/ui";
 import Link from "next/link";
-import { cn } from "@/shared/lib/utils";
 import { CartDrawerItem } from "@/shared/components/shared/cart-drawer-item";
 
 interface Props {
