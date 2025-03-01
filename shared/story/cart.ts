@@ -1,15 +1,6 @@
 import { create } from "zustand";
-
-export type ICartItem = {
-  id: number;
-  quantity: number;
-  name: string;
-  imageUrl: string;
-  price: number;
-  pizzaSize?: number | null;
-  type?: number | null;
-  ingredients: Array<{ name: string; price: number }>;
-};
+import { getCartDetails } from "@/shared/lib";
+import { Api } from "@/shared/services/api-client";
 
 export interface CartState {
   loading: boolean;
