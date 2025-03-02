@@ -1,12 +1,13 @@
 import { create } from "zustand";
 import { getCartDetails } from "@/shared/lib";
 import { Api } from "@/shared/services/api-client";
+import { CartStateItem } from "@/shared/lib/get-cart-details";
 
 export interface CartState {
   loading: boolean;
   error: boolean;
   totalAmount: number;
-  items: ICartItem[];
+  items: CartStateItem[];
 
   /* Получение товаров из корзины */
   fetchCartItems: () => Promise<void>;
@@ -22,7 +23,7 @@ export interface CartState {
 }
 
 export const useCartStore = create<CartState>((set, get) => ({
-  item: [],
+  items: [],
   error: false,
   loading: true,
   totalAmount: 0,
