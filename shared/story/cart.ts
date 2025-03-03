@@ -45,3 +45,95 @@ export const useCartStore = create<CartState>((set, get) => ({
   addCartItem: async (values: any) => {},
   removeCartItem: async (id: number) => {},
 }));
+
+const tree = {
+  type: "nested",
+  children: [
+    { type: "added", value: 42 },
+    {
+      type: "nested",
+      children: [
+        { type: "added", value: 99 },
+        { type: "removed", value: 15 },
+      ],
+    },
+    { type: "added", value: 67 },
+  ],
+};
+
+const maxValue = findMaxValue(tree, "value");
+
+console.log(maxValue); // 99
+
+function findMaxValue(tree, key) {
+  const stack = [tree];
+  let maxValue = -Infinity;
+
+  while (stack.length > 0) {
+    const item = stack.pop();
+
+    if (item[key] !== undefined) {
+      maxValue = Math.max(maxValue, item[key]);
+    }
+
+    if (item.children) {
+      stack.push(...item.children);
+    }
+  }
+
+  return maxValue === -Infinity ? null : maxValue;
+}
+//
+// /*
+// Дана древовидная структура следующего формата:
+//
+// const tree = {
+//     type: 'nested',
+//     children: [
+//         { type: 'added', value: 42 },
+//         {
+//             type: 'nested',
+//             children: [
+//                 { type: 'added', value: 43 },
+//             ]
+//         },
+//         { type: 'added', value: 44 },
+//         ...
+//     ]
+// }
+//
+// Необходимо написать функцию `getNodes(tree, type)`, которая возвращает все ноды в порядке следования, соответствующие переданному типу.
+//
+// Глубина вложенности любая.
+//
+// Пример:
+//
+// const addedItems = getNodes(tree, 'added');
+//
+// // Результат:
+// [
+//     { type: 'added', value: 42 },
+//     { type: 'added', value: 43 },
+//     { type: 'added', value: 44 },
+//     ...
+// ]
+// */
+//
+// function getNodes(tree, type) {
+//   const stack = [tree];
+//   let result = [];
+//
+//   while (stack.length > 0) {
+//     const item = stack.pop();
+//
+//     if (item.type === type) {
+//       result.push(item);
+//     }
+//
+//     if (item.children) {
+//       stack.push(...item.children);
+//     }
+//   }
+// }
+//
+// const addedItems = getNodes(tree, "added");
