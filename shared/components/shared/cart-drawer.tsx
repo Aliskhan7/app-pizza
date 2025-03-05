@@ -33,6 +33,14 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
     fetchCartItems();
   }, []);
 
+  const onClickCountButton = (
+    id: number,
+    quantity: number,
+    type: "plus' | 'minus",
+  ) => {
+    console.log(quantity, type);
+  };
+
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
@@ -63,6 +71,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
                 name={item.name}
                 price={item.price}
                 quantity={item.quantity}
+                onClickCountButton={onClickCountButton}
               />
             ))}
           </div>
