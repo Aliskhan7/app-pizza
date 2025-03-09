@@ -5,8 +5,9 @@ import { Button } from "@/shared/components/ui";
 interface Props {
   imageUrl: string;
   name: string;
+  price: number;
   loading?: boolean;
-  onSubmit: (itemId: number, ingredients: number[]) => void;
+  onSubmit?: VoidFunction;
   className?: string;
 }
 export const ChooseProductForm: React.FC<Props> = ({
@@ -31,7 +32,7 @@ export const ChooseProductForm: React.FC<Props> = ({
         <Title text={name} size="md" className="font-extrabold mb-1" />
 
         <Button
-          loading={loading}
+          // loading={loading}
           onClick={() => onSubmit?.()}
           className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
         >
