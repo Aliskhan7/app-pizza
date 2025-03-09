@@ -35,6 +35,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
     type,
     selectedIngredients,
     availableSizes,
+    currentItemId,
     setSize,
     setType,
     addIngredient,
@@ -49,14 +50,10 @@ export const ChoosePizzaForm: React.FC<Props> = ({
   );
 
   const handleClickAdd = () => {
-    onSubmit?.();
+    if (currentItemId) {
+      onSubmit(currentItemId, Array.from(selectedIngredients));
+    }
   };
-
-  // const handleClickAdd = () => {
-  //   if (currentItemId) {
-  //     onSubmit(currentItemId, Array.from(selectedIngredients));
-  //   }
-  // };
 
   return (
     <div className={cn(className, "flex flex-1")}>
