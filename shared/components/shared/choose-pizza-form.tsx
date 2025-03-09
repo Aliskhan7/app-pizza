@@ -27,6 +27,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
   items,
   imageUrl,
   ingredients,
+  loading,
   onSubmit,
   className,
 }) => {
@@ -94,7 +95,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
         </div>
 
         <Button
-          // loading={loading}
+          loading={loading}
           onClick={handleClickAdd}
           className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10"
         >
