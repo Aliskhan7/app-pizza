@@ -24,13 +24,7 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
     state.loading,
   ]);
 
-  const onAddProduct = () => {
-    addCartItem({
-      productItemId: firstItem,
-    });
-  };
-
-  const onAddPizza = async (productItemId: number, ingredients: number[]) => {
+  const onSubmit = async (productItemId?: number, ingredients?: number[]) => {
     try {
       const itemId = productItemId ?? firstItem.id;
 
@@ -40,6 +34,7 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
       });
 
       toast.success(product.name + " добавлена в корзину");
+
       router.back();
     } catch (err) {
       toast.error("Не удалось добавить товар в корзину");
@@ -61,14 +56,14 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
             name={product.name}
             ingredients={product.ingredients}
             items={product.items}
-            onSubmit={onAddPizza}
+            onSubmit={onSubmit}
             loading={loading}
           />
         ) : (
           <ChooseProductForm
             imageUrl={product.imageUrl}
             name={product.name}
-            onSubmit={onAddProduct}
+            onSubmit={onSubmit}
             price={firstItem.price}
             loading={loading}
           />

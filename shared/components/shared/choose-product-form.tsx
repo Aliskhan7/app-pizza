@@ -15,7 +15,6 @@ export const ChooseProductForm: React.FC<Props> = ({
   imageUrl,
   price,
   onSubmit,
-
   className,
   loading,
 }) => {
