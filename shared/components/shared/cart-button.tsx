@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
-import { Button } from "@/shared/components/ui";
-import { ArrowRight, ShoppingCart } from "lucide-react";
+
 import { cn } from "@/shared/lib/utils";
-import { CartDrawer } from "@/shared/components/shared/cart-drawer";
+import React from "react";
+import { Button } from "../ui";
+import { ArrowRight, ShoppingCart } from "lucide-react";
+import { CartDrawer } from "./cart-drawer";
 import { useCartStore } from "@/shared/story";
 
 interface Props {
@@ -29,8 +30,8 @@ export const CartButton: React.FC<Props> = ({ className }) => {
           <b>{items.length}</b>
         </div>
         <ArrowRight
-          size={16}
-          className=" absolute right-5 transition duration-300 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0"
+          size={20}
+          className="absolute right-5 transition duration-300 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0"
         />
       </Button>
     </CartDrawer>
