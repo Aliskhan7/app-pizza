@@ -41,12 +41,12 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
       <SheetContent className="flex flex-col justify-between pb-0 bg-[#F4F1EE]">
         <SheetHeader>
           <SheetTitle>
-            В корзине <span className="font-bold"> {items.length} товара</span>
+            В корзине <span className="font-bold"> {items?.length} товара</span>
           </SheetTitle>
         </SheetHeader>
 
         <div className="-mx-6 mt-5 overflow-auto flex-1">
-          {items.map((item) => (
+          {items?.map((item) => (
             <div key={item.id} className="mb-2">
               <CartDrawerItem
                 id={item.id}

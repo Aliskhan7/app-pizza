@@ -1,7 +1,9 @@
-import React from "react";
 import { cn } from "@/shared/lib/utils";
-import { Title } from "@/shared/components/shared/title";
-import { Button } from "@/shared/components/ui";
+import React from "react";
+import { Title } from "./title";
+import { Button } from "../ui";
+import { DialogTitle } from "@radix-ui/react-dialog";
+
 interface Props {
   imageUrl: string;
   name: string;
@@ -10,6 +12,10 @@ interface Props {
   onSubmit?: VoidFunction;
   className?: string;
 }
+
+/**
+ * Форма выбора ПРОДУКТА
+ */
 export const ChooseProductForm: React.FC<Props> = ({
   name,
   imageUrl,
@@ -29,8 +35,9 @@ export const ChooseProductForm: React.FC<Props> = ({
       </div>
 
       <div className="w-[490px] bg-[#f7f6f5] p-7">
-        <Title text={name} size="md" className="font-extrabold mb-1" />
-
+        <DialogTitle className="font-extrabold mb-1 text-4xl">
+          {name}
+        </DialogTitle>
         <Button
           loading={loading}
           onClick={() => onSubmit?.()}

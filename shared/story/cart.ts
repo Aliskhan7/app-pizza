@@ -54,6 +54,7 @@ export const useCartStore = create<CartState>((set, get) => ({
       set({ loading: false });
     }
   },
+
   addCartItem: async (id: number) => {
     try {
       set({ loading: true, error: false });
