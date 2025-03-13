@@ -2,15 +2,17 @@
 
 import React from "react";
 import { Ingredient, ProductItem } from "@prisma/client";
-import { cn } from "@/shared/lib/utils";
-import { Title } from "@/shared/components/shared";
-import { GroupVariants } from "@/shared/components/shared";
-import { PizzaImage } from "@/shared/components/shared";
+
+import { PizzaImage } from "./pizza-image";
+import { Title } from "./title";
+import { Button } from "../ui";
 import { PizzaSize, PizzaType, pizzaTypes } from "@/shared/constants/pizza";
-import { Button } from "@/shared/components/ui";
+import { IngredientItem } from "./ingredient-item";
+import { cn } from "@/shared/lib/utils";
 import { getPizzaDetails } from "@/shared/lib";
-import { IngredientItem } from "@/shared/components/shared";
 import { usePizzaOptions } from "@/shared/hooks";
+import { GroupVariants } from "@/shared/components/shared/group-varients";
+import { DialogTitle } from "@radix-ui/react-dialog";
 
 interface Props {
   imageUrl: string;
@@ -22,6 +24,9 @@ interface Props {
   className?: string;
 }
 
+/**
+ * Форма выбора ПИЦЦЫ
+ */
 export const ChoosePizzaForm: React.FC<Props> = ({
   name,
   items,
@@ -41,7 +46,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
     setType,
     addIngredient,
   } = usePizzaOptions(items);
-  //
+
   const { totalPrice, textDetails } = getPizzaDetails(
     type,
     size,
@@ -49,6 +54,8 @@ export const ChoosePizzaForm: React.FC<Props> = ({
     ingredients,
     selectedIngredients,
   );
+
+  console.log();
 
   const handleClickAdd = () => {
     if (currentItemId) {
@@ -61,7 +68,9 @@ export const ChoosePizzaForm: React.FC<Props> = ({
       <PizzaImage imageUrl={imageUrl} size={size} />
 
       <div className="w-[490px] bg-[#f7f6f5] p-7">
-        <Title text={name} size="md" className="font-extrabold mb-1" />
+        <DialogTitle className="font-extrabold mb-1 text-4xl">
+          {name}
+        </DialogTitle>
 
         <p className="text-gray-400">{textDetails}</p>
 
