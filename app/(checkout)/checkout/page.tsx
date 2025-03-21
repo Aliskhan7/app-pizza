@@ -1,5 +1,6 @@
 import { Container, Title } from "@/shared/components/shared";
 import React from "react";
+import { CheckoutSidebar } from "@/shared/components/shared/checkout-sidebar";
 
 export const ChackoutPage = () => {
   return (
