@@ -22,5 +22,7 @@ export { CheckoutItemDetails } from "./checkout-item-details";
 export { CheckoutSidebar } from "./checkout-sidebar";
 export { CheckoutItem } from "./checkout-item";
 export { CheckoutItemSkeleton } from "./checkout-item-skeleton";
+export { RequiredSymbol } from "./required-symbol";
+export { ErrorText } from "./error-text";
 
 export * from "./modals";

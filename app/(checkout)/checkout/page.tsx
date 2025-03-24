@@ -8,6 +8,15 @@ import { CheckoutCart } from "@/shared/components/shared/checkout";
 export const ChackoutPage = () => {
   const { totalAmount, updateItemQuantity, items, removeCartItem } = useCart();
 
+  const onClickCountButton = (
+    id: number,
+    quantity: number,
+    type: "plus" | "minus",
+  ) => {
+    const newQuantity = type === "plus" ? quantity + 1 : quantity - 1;
+    updateItemQuantity(id, newQuantity);
+  };
+
   return (
     <Container className="mt-5">
       <Title
