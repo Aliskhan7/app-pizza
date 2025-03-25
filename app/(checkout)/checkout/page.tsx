@@ -1,12 +1,31 @@
 "use client";
+
+import { FormProvider, useForm } from "react-hook-form";
 import { Container, Title } from "@/shared/components/shared";
 import React from "react";
 import { CheckoutSidebar } from "@/shared/components/shared/checkout-sidebar";
 import { useCart } from "@/shared/hooks";
-import { CheckoutCart } from "@/shared/components/shared/checkout";
+import {
+  CheckoutAddressForm,
+  CheckoutCart,
+  CheckoutPersonalForm,
+} from "@/shared/components/shared/checkout";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-export const ChackoutPage = () => {
+export const CheckoutPage = () => {
   const { totalAmount, updateItemQuantity, items, removeCartItem } = useCart();
+
+  const form = useForm({
+    resolver: zodResolver(),
+    defaultValues: {
+      email: "",
+      firstName: "",
+      lastName: "",
+      phone: "",
+      address: "",
+      comment: "",
+    },
+  });
 
   const onClickCountButton = (
     id: number,

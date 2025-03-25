@@ -1,5 +1,9 @@
 import React from "react";
-import { ErrorText, RequiredSymbol } from "@/shared/components/shared";
+import {
+  ClearButton,
+  ErrorText,
+  RequiredSymbol,
+} from "@/shared/components/shared";
 import { Input } from "@/shared/components/ui";
 import { useFormContext } from "react-hook-form";
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -26,6 +30,7 @@ export const FormInput: React.FC<Props> = ({
 
       <div className="relative">
         <Input className="h-12 text-md" {...props} />
+        <ClearButton />
       </div>
 
       <ErrorText text={errorText} className="mt-2" />
