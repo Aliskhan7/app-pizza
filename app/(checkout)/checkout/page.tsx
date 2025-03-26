@@ -11,12 +11,16 @@ import {
   CheckoutPersonalForm,
 } from "@/shared/components/shared/checkout";
 import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  checkoutFormSchema,
+  CheckoutFormValues,
+} from "@/shared/components/shared/checkout/checkout-form-schema";
 
 export const CheckoutPage = () => {
   const { totalAmount, updateItemQuantity, items, removeCartItem } = useCart();
 
-  const form = useForm({
-    resolver: zodResolver(),
+  const form = useForm<CheckoutFormValues>({
+    resolver: zodResolver(checkoutFormSchema),
     defaultValues: {
       email: "",
       firstName: "",
@@ -26,6 +30,8 @@ export const CheckoutPage = () => {
       comment: "",
     },
   });
+
+  const onSubmit = (data: CheckoutFormValues) => {};
 
   const onClickCountButton = (
     id: number,
