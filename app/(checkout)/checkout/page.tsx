@@ -16,7 +16,7 @@ import {
   CheckoutFormValues,
 } from "@/shared/components/shared/checkout/checkout-form-schema";
 
-export const CheckoutPage = () => {
+export default function CheckoutPage() {
   const { totalAmount, updateItemQuantity, items, removeCartItem } = useCart();
 
   const form = useForm<CheckoutFormValues>({
@@ -58,15 +58,15 @@ export const CheckoutPage = () => {
                 onClickCountButton={onClickCountButton}
                 removeCartItem={removeCartItem}
                 items={items}
-                loading={loading}
+                // loading={loading}
               />
 
               <CheckoutPersonalForm
-                className={loading ? "opacity-40 pointer-events-none" : ""}
+              // className={loading ? "opacity-40 pointer-events-none" : ""}
               />
 
               <CheckoutAddressForm
-                className={loading ? "opacity-40 pointer-events-none" : ""}
+              // className={loading ? "opacity-40 pointer-events-none" : ""}
               />
             </div>
 
@@ -74,7 +74,7 @@ export const CheckoutPage = () => {
             <div className="w-[450px]">
               <CheckoutSidebar
                 totalAmount={totalAmount}
-                loading={loading || submitting}
+                // loading={loading || submitting}
               />
             </div>
           </div>
@@ -82,4 +82,4 @@ export const CheckoutPage = () => {
       </FormProvider>
     </Container>
   );
-};
+}
