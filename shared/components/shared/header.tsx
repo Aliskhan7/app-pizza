@@ -14,7 +14,11 @@ interface Props {
   className?: string;
 }
 
-export const Header: React.FC<Props> = ({ className, hasSearch, hasCart }) => {
+export const Header: React.FC<Props> = ({
+  className,
+  hasSearch = true,
+  hasCart = true,
+}) => {
   return (
     <header className={cn(" border-b", className)}>
       <Container className="flex items-center justify-between py-8">
