@@ -25,6 +25,7 @@ export { CheckoutItemSkeleton } from "./checkout-item-skeleton";
 export { RequiredSymbol } from "./required-symbol";
 export { ErrorText } from "./error-text";
 export { ClearButton } from "./clear-button";
+export { AddressInput } from "./address-input";
 
 export * from "./form";
 export * from "./modals";
