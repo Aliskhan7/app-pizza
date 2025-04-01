@@ -1,9 +1,11 @@
 "use server";
 
-import { CheckoutFormValues } from "@/shared/constants";
 import { prisma } from "@/prisma/prisma-client";
 import { OrderStatus } from "@prisma/client";
 import { cookies } from "next/headers";
+import { sendEmail } from "@/shared/lib";
+import { PayOrderTemplate } from "@/shared/components";
+import { CheckoutFormValues } from "@/shared/constants";
 
 export async function createOrder(data: CheckoutFormValues) {
   try {
@@ -43,7 +45,7 @@ export async function createOrder(data: CheckoutFormValues) {
       throw new Error("Cart is empty");
     }
 
-    await prisma.order.create({
+    const order = await prisma.order.create({
       data: {
         token: cartToken,
         fullName: data.firstName + " " + data.lastName,
@@ -54,6 +56,31 @@ export async function createOrder(data: CheckoutFormValues) {
         totalAmount: userCart.totalAmount,
         status: OrderStatus.PENDING,
         items: JSON.stringify(userCart.items),
+      },
+    });
+
+    await prisma.cart.update({
+      where: {
+        id: userCart.id,
+      },
+      data: {
+        totalAmount: 0,
+      },
+    });
+
+    await sendEmail(
+      data.email,
+      "Next Pizza / Оплатите заказ #" + order.id,
+      PayOrderTemplate({
+        orderId: order.id,
+        totalAmount: order.totalAmount,
+        paymentUrl,
+      }),
+    );
+
+    await prisma.cartItem.deleteMany({
+      where: {
+        cartId: userCart.id,
       },
     });
   } catch (err) {}
