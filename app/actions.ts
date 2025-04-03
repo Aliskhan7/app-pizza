@@ -68,6 +68,12 @@ export async function createOrder(data: CheckoutFormValues) {
       },
     });
 
+    await prisma.cartItem.deleteMany({
+      where: {
+        cartId: userCart.id,
+      },
+    });
+
     const paymentData = await createPayment({
       amount: order.totalAmount,
       orderId: order.id,
@@ -77,21 +83,29 @@ export async function createOrder(data: CheckoutFormValues) {
     if (!paymentData) {
       throw new Error("Payment data not found");
     }
+
+    await prisma.order.update({
+      where: {
+        id: order.id,
+      },
+      data: {
+        paymentId: paymentData.id,
+      },
+    });
+
+    const paymentUrl = paymentData.confirmation.confirmation_url;
+
     await sendEmail(
       data.email,
       "Next Pizza / Оплатите заказ #" + order.id,
       PayOrderTemplate({
         orderId: order.id,
         totalAmount: order.totalAmount,
-        paymentUrl: "google.com",
+        paymentUrl,
       }),
     );
 
-    await prisma.cartItem.deleteMany({
-      where: {
-        cartId: userCart.id,
-      },
-    });
+    return paymentUrl;
   } catch (err) {
     console.log("[CreateOrder] Server error", err);
   }
