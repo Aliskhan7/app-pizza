@@ -2,15 +2,16 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 import { cn } from "@/shared/lib/utils";
-import { User } from "lucide-react";
-import { Container, ProfileButton } from "@/shared/components/shared";
-import { Button } from "@/shared/components/ui";
+import {
+  AuthModal,
+  Container,
+  ProfileButton,
+} from "@/shared/components/shared";
 import Link from "next/link";
 import { SearchInput } from "@/shared/components/shared";
 import { CartButton } from "@/shared/components/shared";
 import toast from "react-hot-toast";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useSession, signIn } from "next-auth/react";
 
 interface Props {
   hasSearch?: boolean;
@@ -71,10 +72,10 @@ export const Header: React.FC<Props> = ({
 
         {/* Правая часть */}
         <div className="flex items-center gap-3">
-          {/*<AuthModal*/}
-          {/*  open={openAuthModal}*/}
-          {/*  onClose={() => setOpenAuthModal(false)}*/}
-          {/*/>*/}
+          <AuthModal
+            open={openAuthModal}
+            onClose={() => setOpenAuthModal(false)}
+          />
 
           <ProfileButton onClickSignIn={() => setOpenAuthModal(true)} />
 
