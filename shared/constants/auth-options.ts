@@ -5,8 +5,9 @@ import { prisma } from "@/prisma/prisma-client";
 
 import { UserRole } from "@prisma/client";
 import { compare } from "bcrypt";
+import { AuthOptions } from "next-auth";
 
-export const authOptions = {
+export const authOptions: AuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
