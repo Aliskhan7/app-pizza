@@ -1,12 +1,13 @@
 "use server";
 
 import { prisma } from "@/prisma/prisma-client";
-import { OrderStatus, Prisma } from "@prisma/client";
-import { cookies } from "next/headers";
-import { createPayment, getUserSession, sendEmail } from "@/shared/lib";
-import { CheckoutFormValues } from "@/shared/constants";
 import { PayOrderTemplate } from "@/shared/components";
+import { CheckoutFormValues } from "@/shared/constants";
+import { createPayment, sendEmail } from "@/shared/lib";
+import { getUserSession } from "@/shared/lib/get-user-session";
+import { OrderStatus, Prisma } from "@prisma/client";
 import { hashSync } from "bcrypt";
+import { cookies } from "next/headers";
 import { VerificationUserTemplate } from "@/shared/components/shared/email-templates/verification-user";
 
 export async function createOrder(data: CheckoutFormValues) {
@@ -18,6 +19,7 @@ export async function createOrder(data: CheckoutFormValues) {
       throw new Error("Cart token not found");
     }
 
+    /* Находим корзину по токену */
     const userCart = await prisma.cart.findFirst({
       include: {
         user: true,
@@ -47,6 +49,7 @@ export async function createOrder(data: CheckoutFormValues) {
       throw new Error("Cart is empty");
     }
 
+    /* Создаем заказ */
     const order = await prisma.order.create({
       data: {
         token: cartToken,
@@ -61,6 +64,7 @@ export async function createOrder(data: CheckoutFormValues) {
       },
     });
 
+    /* Очищаем корзину */
     await prisma.cart.update({
       where: {
         id: userCart.id,
@@ -112,6 +116,7 @@ export async function createOrder(data: CheckoutFormValues) {
     console.log("[CreateOrder] Server error", err);
   }
 }
+
 export async function updateUserInfo(body: Prisma.UserUpdateInput) {
   try {
     const currentUser = await getUserSession();
