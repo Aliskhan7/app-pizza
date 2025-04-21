@@ -1,7 +1,6 @@
 "use server";
 
 import { prisma } from "@/prisma/prisma-client";
-import { PayOrderTemplate } from "@/shared/components";
 import { CheckoutFormValues } from "@/shared/constants";
 import { createPayment, sendEmail } from "@/shared/lib";
 import { getUserSession } from "@/shared/lib/get-user-session";
@@ -9,10 +8,11 @@ import { OrderStatus, Prisma } from "@prisma/client";
 import { hashSync } from "bcrypt";
 import { cookies } from "next/headers";
 import { VerificationUserTemplate } from "@/shared/components/shared/email-templates/verification-user";
+import { PayOrderTemplate } from "@/shared/components";
 
 export async function createOrder(data: CheckoutFormValues) {
   try {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const cartToken = cookieStore.get("cartToken")?.value;
 
     if (!cartToken) {
