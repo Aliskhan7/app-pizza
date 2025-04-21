@@ -26,6 +26,7 @@ export { RequiredSymbol } from "./required-symbol";
 export { ErrorText } from "./error-text";
 export { ClearButton } from "./clear-button";
 export { AddressInput } from "./address-input";
+export { ProductsGroupList } from "./product-group-list";
 export { ProfileButton } from "./profile-button";
 export { ProfileForm } from "./profile-form";
 export { InfoBlock } from "./info-block";

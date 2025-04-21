@@ -1,20 +1,21 @@
 "use client";
 
 import { FormProvider, useForm } from "react-hook-form";
-import React, { useEffect } from "react";
-import { useCart } from "@/shared/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
+  CheckoutSidebar,
   Container,
   Title,
-  CheckoutSidebar,
   CheckoutAddressForm,
   CheckoutCart,
   CheckoutPersonalForm,
 } from "@/shared/components";
-import { checkoutFormSchema, CheckoutFormValues } from "@/shared/constants";
+import { CheckoutFormValues, checkoutFormSchema } from "@/shared/constants";
+import { useCart } from "@/shared/hooks";
 import { createOrder } from "@/app/actions";
 import toast from "react-hot-toast";
+import React from "react";
 import { useSession } from "next-auth/react";
 import { Api } from "@/shared/services/api-client";
 
@@ -22,7 +23,6 @@ export default function CheckoutPage() {
   const [submitting, setSubmitting] = React.useState(false);
   const { totalAmount, updateItemQuantity, items, removeCartItem, loading } =
     useCart();
-
   const { data: session } = useSession();
 
   const form = useForm<CheckoutFormValues>({
@@ -37,7 +37,7 @@ export default function CheckoutPage() {
     },
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     async function fetchUserInfo() {
       const data = await Api.auth.getMe();
       const [firstName, lastName] = data.fullName.split(" ");
@@ -84,7 +84,7 @@ export default function CheckoutPage() {
   };
 
   return (
-    <Container className="mt-5">
+    <Container className="mt-10">
       <Title
         text="Оформление заказа"
         className="font-extrabold mb-8 text-[36px]"
