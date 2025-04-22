@@ -8,7 +8,6 @@ import { OrderStatus, Prisma } from "@prisma/client";
 import { hashSync } from "bcrypt";
 import { cookies } from "next/headers";
 import { VerificationUserTemplate } from "@/shared/components/shared/email-templates/verification-user";
-import { PayOrderTemplate } from "@/shared/components";
 
 export async function createOrder(data: CheckoutFormValues) {
   try {
