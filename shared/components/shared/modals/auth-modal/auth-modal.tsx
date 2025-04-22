@@ -29,7 +29,7 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
         {type === "login" ? (
           <LoginForm onClose={handleClose} />
         ) : (
-          <div>csd</div>
+          <RegisterForm onClose={handleClose} />
         )}
 
         <hr />

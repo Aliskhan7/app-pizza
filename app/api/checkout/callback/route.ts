@@ -1,9 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
 import { PaymentCallbackData } from "@/@types/yookassa";
 import { prisma } from "@/prisma/prisma-client";
-import { OrderStatus } from "@prisma/client";
-import { OrderSuccessTemplate } from "@/shared/components";
 import { sendEmail } from "@/shared/lib";
+import { CartItemDto } from "@/shared/services/dto/cart.dto";
+import { OrderStatus } from "@prisma/client";
+import { NextRequest, NextResponse } from "next/server";
+import { OrderSuccessTemplate } from "@/shared/components";
 
 export async function POST(req: NextRequest) {
   try {
@@ -30,6 +31,8 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    const items = JSON.parse(order?.items as string) as CartItemDto[];
+
     if (isSucceeded) {
       await sendEmail(
         order.email,
@@ -40,6 +43,7 @@ export async function POST(req: NextRequest) {
       // Письмо о неуспешной оплате
     }
   } catch (error) {
-    return NextResponse.json({ error: "Server Error" });
+    console.log("[Checkout Callback] Error:", error);
+    return NextResponse.json({ error: "Server error" });
   }
 }

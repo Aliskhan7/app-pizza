@@ -4,17 +4,17 @@ import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
+import { registerUser } from "@/app/actions";
 import { TFormRegisterValues, formRegisterSchema } from "./schemas";
 import { FormInput } from "../../../form";
 import { Button } from "@/shared/components/ui";
-import { registerUser } from "@/app/actions";
 
 interface Props {
   onClose?: VoidFunction;
   onClickLogin?: VoidFunction;
 }
 
-export const RegisterForm: React.FC<Props> = ({ onClose, onClickLogin }) => {
+export const RegisterForm: React.FC<Props> = ({ onClose }) => {
   const form = useForm<TFormRegisterValues>({
     resolver: zodResolver(formRegisterSchema),
     defaultValues: {

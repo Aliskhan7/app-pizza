@@ -1,7 +1,7 @@
-import { signIn, useSession } from "next-auth/react";
-import { CircleUser, User } from "lucide-react";
-import { Button } from "@/shared/components";
+import { useSession } from "next-auth/react";
 import React from "react";
+import { Button } from "../ui/button";
+import { CircleUser, User } from "lucide-react";
 import Link from "next/link";
 
 interface Props {
@@ -20,7 +20,7 @@ export const ProfileButton: React.FC<Props> = ({
         <Button
           onClick={onClickSignIn}
           variant="outline"
-          className="items-center flex gap-3"
+          className="flex items-center gap-1"
         >
           <User size={16} />
           Войти
