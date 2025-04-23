@@ -1,9 +1,9 @@
-import { Variant } from "@/shared/components/shared/group-varients";
-import { useEffect, useState } from "react";
-import { PizzaSize, pizzaSizes, PizzaType } from "@/shared/constants/pizza";
+import { PizzaSize, PizzaType } from "@/shared/constants/pizza";
+import React from "react";
 import { useSet } from "react-use";
-import { getAvailablePizzaSizes } from "@/shared/lib";
+import { getAvailablePizzaSizes } from "../lib";
 import { ProductItem } from "@prisma/client";
+import { Variant } from "@/shared/components/shared/group-varients";
 
 interface ReturnProps {
   size: PizzaSize;
@@ -17,25 +17,26 @@ interface ReturnProps {
 }
 
 export const usePizzaOptions = (items: ProductItem[]): ReturnProps => {
-  const [size, setSize] = useState<PizzaSize>(20);
-  const [type, setType] = useState<PizzaType>(1);
+  const [size, setSize] = React.useState<PizzaSize>(20);
+  const [type, setType] = React.useState<PizzaType>(1);
   const [selectedIngredients, { toggle: addIngredient }] = useSet(
     new Set<number>([]),
   );
+
   const availableSizes = getAvailablePizzaSizes(type, items);
 
   const currentItemId = items.find(
     (item) => item.pizzaType === type && item.size === size,
   )?.id;
 
-  useEffect(() => {
-    const isAvaibleSize = availableSizes?.find(
+  React.useEffect(() => {
+    const isAvailableSize = availableSizes?.find(
       (item) => Number(item.value) === size && !item.disabled,
     );
-    const avaibleSize = availableSizes?.find((item) => !item.disabled);
+    const availableSize = availableSizes?.find((item) => !item.disabled);
 
-    if (!isAvaibleSize && avaibleSize) {
-      setSize(Number(avaibleSize.value) as PizzaSize);
+    if (!isAvailableSize && availableSize) {
+      setSize(Number(availableSize.value) as PizzaSize);
     }
   }, [type]);
 
