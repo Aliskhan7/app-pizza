@@ -3,8 +3,8 @@ import {
   Filters,
   Title,
   TopBar,
-  Stories,
   ProductsGroupList,
+  Stories,
 } from "@/shared/components/shared";
 import { Suspense } from "react";
 import { GetSearchParams, findPizzas } from "@/shared/lib/find-pizzas";

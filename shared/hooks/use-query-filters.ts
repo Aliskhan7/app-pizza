@@ -1,14 +1,14 @@
 import { useEffect, useRef } from "react";
+import { Filters } from "./use-filters";
 import qs from "qs";
 import { useRouter } from "next/navigation";
-import { Filters } from "@/shared/hooks/use-filters";
 
 export const useQueryFilters = (filters: Filters) => {
-  const router = useRouter();
   const isMounted = useRef(false);
+  const router = useRouter();
 
   useEffect(() => {
-    if (isMounted) {
+    if (isMounted.current) {
       const params = {
         ...filters.prices,
         pizzaTypes: Array.from(filters.pizzaTypes),
@@ -19,9 +19,6 @@ export const useQueryFilters = (filters: Filters) => {
       const query = qs.stringify(params, {
         arrayFormat: "comma",
       });
-      if (window.location.search === `?${query}`) {
-        return; // ⛔ Если URL уже такой же, выходим из useEffect
-      }
 
       router.push(`?${query}`, {
         scroll: false,
