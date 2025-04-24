@@ -27,7 +27,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/qs": "^6.9.18",
     "axios": "^1.7.9",
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "localtunnel": "^2.0.2",
@@ -60,7 +60,9 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.1.2",
+    "null-loader": "^4.0.1",
     "postcss": "^8",
+    "raw-loader": "^4.0.2",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
