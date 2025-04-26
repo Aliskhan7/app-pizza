@@ -22,7 +22,6 @@ export const Stories: React.FC<Props> = ({ className }) => {
       const data = await Api.stories.getAll();
       setStories(data);
     }
-
     fetchStories();
   }, []);
 
@@ -50,7 +49,7 @@ export const Stories: React.FC<Props> = ({ className }) => {
             />
           ))}
 
-        {stories.map((story) => (
+        {stories.slice(0, 6).map((story) => (
           <img
             key={story.id}
             onClick={() => onClickStory(story)}
